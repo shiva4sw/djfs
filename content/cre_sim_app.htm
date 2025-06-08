@@ -1,0 +1,55 @@
+<h2>Creating Simple App</h2>
+
+<dl>
+  <dt>Step 1: Navigate to your Django project folder</dt>
+  <dd>Use the command: <code>cd myproject</code></dd>
+
+  <dt>Step 2: Create a new app</dt>
+  <dd>Run the command: <code>python manage.py startapp myapp</code><br>
+      Replace <code>myapp</code> with your desired app name.</dd>
+
+  <dt>Step 3: Register the app in settings.py</dt>
+  <dd>Open <code>myproject/settings.py</code> and add <code>'myapp'</code> to the <code>INSTALLED_APPS</code> list.</dd>
+
+  <dt>Step 4: Open your app's <code>views.py</code></dt>
+  <dd>Define a function that returns a response. For example:
+    <pre><code>
+from django.http import HttpResponse
+
+def home(request):
+    response_str = "Hello, Django!"  
+    return HttpResponse(response_str)
+    </code></pre>
+    <div class="info">Use HTML tags in response_str to display pages</div>
+  </dd>
+
+  <dt>Step 5: Create <code>urls.py</code> in your app (if not already created)</dt>
+  <dd>
+    Add the following code:
+    <pre><code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.home, name='home'),
+]
+    </code></pre>
+  </dd>
+
+  <dt>Step 6: Include the app URLs in the project’s <code>urls.py</code></dt>
+  <dd>
+    In <code>myproject/urls.py</code>, include your app's URLs:
+    <pre><code>
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('myapp.urls')),
+]
+    </code></pre>
+  </dd>
+
+  <dt>Step 7: Run the server</dt>
+  <dd>Use the command: <code>python manage.py runserver</code> and open <code>http://127.0.0.1:8000/</code> in your browser to see the output.</dd>
+ </dl>

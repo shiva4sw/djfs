@@ -1,0 +1,60 @@
+<dl>
+  <dt>1. Install MySQL Client Library</dt>
+  <dd>
+    Install the Python MySQL client:
+    <pre><code>pip install mysqlclient</code></pre>
+    If using Windows and facing issues, you can try:
+    <pre><code>pip install pymysql</code></pre>
+  </dd>
+
+  <dt>2. Create a MySQL Database</dt>
+  <dd>
+    Using MySQL terminal or MySQL Workbench:
+    <pre><code>
+CREATE DATABASE myproject;
+    </code></pre>
+  </dd>
+
+  <dt>3. Configure <code>settings.py</code></dt>
+  <dd>
+    In your Django project’s <code>settings.py</code>, update the <code>DATABASES</code> section:
+    <pre><code>
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'myproject',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+    </code></pre>
+    If using <code>pymysql</code> instead of <code>mysqlclient</code>, add this at the top of <code>settings.py</code>:
+    <pre><code>
+import pymysql
+pymysql.install_as_MySQLdb()
+    </code></pre>
+  </dd>
+
+  <dt>4. Run Migrations</dt>
+  <dd>
+    Apply your Django models to the MySQL database:
+    <pre><code>
+python manage.py makemigrations
+python manage.py migrate
+    </code></pre>
+  </dd>
+
+  <dt>5. Run Server</dt>
+  <dd>
+    <pre><code>python manage.py runserver</code></pre>
+  </dd>
+
+  <dt>6. Troubleshooting</dt>
+  <dd>
+    - Ensure MySQL service is running.<br>
+    - Use the correct host and port.<br>
+    - For MySQL 8+, you may need to set <code>auth_plugin=mysql_native_password</code> for your user.
+  </dd>
+</dl>

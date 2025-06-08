@@ -1,0 +1,60 @@
+<dl>
+  <dt>Step 1: Create a view in <code>views.py</code> that passes parameters to a template</dt>
+  <dd>
+    <pre><code>
+from django.shortcuts import render
+
+def show_profile(request, name, age):
+    context = {'name': name.capitalize(), 'age': age}
+    return render(request, 'profile.html', context)
+    </code></pre>
+  </dd>
+
+  <dt>Step 2: Define a URL pattern with parameters in <code>urls.py</code></dt>
+  <dd>
+    <pre><code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('profile/&lt;str:name&gt;/&lt;int:age&gt;/', views.show_profile, name='profile'),
+]
+    </code></pre>
+  </dd>
+
+  <dt>Step 3: Create a template file <code>profile.html</code> inside a <code>templates</code> folder</dt>
+  <dd>
+    Create the folder structure like:<br>
+    <code>myapp/templates/profile.html</code><br>
+    
+    <pre>Sample content:<code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;User Profile&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;User Profile&lt;/h1&gt;
+    &lt;p&gt;Name: {{ name }}&lt;/p&gt;
+    &lt;p&gt;Age: {{ age }}&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code></pre>
+  </dd>
+
+  <dt>Step 4: Make sure Django knows where to find templates</dt>
+  <dd>
+    In <code>settings.py</code>, ensure this is in the TEMPLATES setting:
+    <pre><code>
+'DIRS': [],
+'APP_DIRS': True,
+    </code></pre>
+  </dd>
+
+  <dt>Step 5: Run the server and test</dt>
+  <dd>
+    <code>python manage.py runserver</code><br>
+    Open <code>http://127.0.0.1:8000/profile/Kumar/25/</code><br>
+    You'll see the HTML page showing: "Name: Kumar, Age: 25"
+  </dd>
+</dl>

@@ -1,0 +1,131 @@
+<dl>
+  <dt>1. What is a Django Model?</dt>
+  <dd>
+    A Django model is a Python class that maps to a table in the database. Each model field represents a column in that table.
+    <br><br>
+    Example:
+    <pre><code>
+from django.db import models
+
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    published_date = models.DateField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    </code></pre>
+    Execute following commands in project folder:
+    <pre>
+    <code>python manage.py makemigrations</code>
+    <code>python manage.py migrate</code>
+    </pre>
+  </dd>
+
+  <dt>2. Common Field Types</dt>
+  <dd>
+    <ul>
+      <li><strong>CharField</strong> – For short text strings.
+        <pre><code>title = models.CharField(max_length=100)</code></pre>
+      </li>
+      <li><strong>TextField</strong> – For large text.
+        <pre><code>description = models.TextField()</code></pre>
+      </li>
+      <li><strong>IntegerField</strong> – For integers.
+        <pre><code>quantity = models.IntegerField()</code></pre>
+      </li>
+      <li><strong>DecimalField</strong> – For fixed-point numbers (e.g., prices).
+        <pre><code>price = models.DecimalField(max_digits=10, decimal_places=2)</code></pre>
+      </li>
+      <li><strong>FloatField</strong> – For floating-point numbers.
+        <pre><code>rating = models.FloatField()</code></pre>
+      </li>
+      <li><strong>BooleanField</strong> – For true/false values.
+        <pre><code>is_active = models.BooleanField(default=True)</code></pre>
+      </li>
+      <li><strong>DateField</strong> – For dates.
+        <pre><code>published_on = models.DateField()</code></pre>
+      </li>
+      <li><strong>DateTimeField</strong> – For date and time.
+        <pre><code>created_at = models.DateTimeField(auto_now_add=True)</code></pre>
+      </li>
+      <li><strong>ImageField</strong> – For image uploads.
+        <pre><code>image = models.ImageField(upload_to='images/')</code></pre>
+      </li>
+      <li><strong>FileField</strong> – For file uploads.
+        <pre><code>document = models.FileField(upload_to='docs/')</code></pre>
+      </li>
+      <li><strong>EmailField</strong> – For email addresses.
+        <pre><code>email = models.EmailField()</code></pre>
+      </li>
+      <li><strong>URLField</strong> – For URLs.
+        <pre><code>website = models.URLField()</code></pre>
+      </li>
+    </ul>
+  </dd>
+
+  <dt>3. Relationship Fields</dt>
+  <dd>
+    <ul>
+      <li><strong>ForeignKey</strong> – One-to-many relationship.
+        <pre><code>author = models.ForeignKey(Author, on_delete=models.CASCADE)</code></pre>
+      </li>
+      <li><strong>OneToOneField</strong> – One-to-one relationship.
+        <pre><code>profile = models.OneToOneField(User, on_delete=models.CASCADE)</code></pre>
+      </li>
+      <li><strong>ManyToManyField</strong> – Many-to-many relationship.
+        <pre><code>categories = models.ManyToManyField(Category)</code></pre>
+      </li>
+    </ul>
+  </dd>
+
+  <dt>4. Common Field Options</dt>
+  <dd>
+    <ul>
+      <li><code>max_length</code> – Maximum number of characters (for text fields).</li>
+      <li><code>default</code> – Default value if none is provided.</li>
+      <li><code>null</code> – Whether the field can be NULL in the database.</li>
+      <li><code>blank</code> – Whether the field is allowed to be blank in forms.</li>
+      <li><code>choices</code> – Limit field value to predefined options.</li>
+      <li><code>unique</code> – Must be unique across rows.</li>
+      <li><code>auto_now</code> – Updates date/time on each save.</li>
+      <li><code>auto_now_add</code> – Sets date/time when object is created.</li>
+    </ul>
+  </dd>
+
+  <dt>5. Example with All</dt>
+  <dd>
+    <pre><code>
+class Product(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    price = models.DecimalField(max_digits=7, decimal_places=2)
+    stock = models.IntegerField(default=0)
+    is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    </code></pre>
+  </dd>
+  <br/>
+  <dt>5. What is a ForeignKey?</dt>
+  <dd>
+    A <code>ForeignKey</code> in Django creates a one-to-many relationship between two models.
+    Example: Each product belongs to one category, but a category can have many products.
+  </dd>
+
+  <dt>6. Example Models</dt>
+  <dd>
+    <pre><code>
+from django.db import models
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    </code></pre>
+  </dd>
+</dl>

@@ -1,0 +1,54 @@
+<h2>Tyoe of Views</h2>
+
+<dl>
+  <dt>1. Function-Based Views (FBV)</dt>
+  <dd>
+    <ul>
+      <li>Simple Python functions that receive a request and return a response.</li>
+      <li>Best for small and simple logic.</li>
+    </ul>
+    
+    <pre><strong>Example:</strong><code>
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Hello, world!")
+    </code></pre>
+  </dd>
+
+  <dt>2. Class-Based Views (CBV)</dt>
+  <dd>
+    <ul>
+      <li>Views written as Python classes.</li>
+      <li>Useful for reusability and structure in larger apps.</li>
+      <li>Provide built-in generic views like <code>ListView</code>, <code>DetailView</code>, <code>CreateView</code>, etc.</li>
+    </ul>
+    
+    <pre><strong>Example:</strong><code>
+from django.views import View
+from django.http import HttpResponse
+
+class HomeView(View):
+    def get(self, request):
+        return HttpResponse("Hello from class-based view!")
+    </code></pre>
+  </dd>
+
+  <dt>3. Generic Class-Based Views</dt>
+  <dd>
+    <ul>
+      <li>Django provides generic views for common use cases: listing, showing details, creating, updating, and deleting objects.</li>
+    </ul>
+    
+    <pre><strong>Example:</strong><code>
+from django.views.generic import ListView
+from .models import Post
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'post_list.html'
+    </code></pre>
+    <div class="info">Will be discussed soon</div>
+  </dd>
+
+</dl>

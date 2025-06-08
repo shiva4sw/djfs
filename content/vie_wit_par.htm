@@ -1,0 +1,43 @@
+<dl>
+  <dt>Step 1: Define a view with multiple parameters in <code>views.py</code></dt>
+  <dd>
+    
+    <pre>Example:<code>
+from django.http import HttpResponse
+
+def show_profile(request, name, age):
+    return HttpResponse(f"Name: {name.capitalize()}, Age: {age}")
+    </code></pre>
+  </dd>
+
+  <dt>Step 2: Add a URL pattern with multiple parameters in <code>urls.py</code> of your app</dt>
+  <dd>
+    
+    <pre>Example:<code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('profile/&lt;str:name&gt;/&lt;int:age&gt;/', views.show_profile, name='profile'),
+]
+    </code></pre>
+  </dd>
+
+  <dt>Step 3: Include app URLs in the project’s <code>urls.py</code> (if not already done)</dt>
+  <dd>
+    <pre><code>
+from django.urls import path, include
+
+urlpatterns = [
+    path('', include('myapp.urls')),
+]
+    </code></pre>
+  </dd>
+
+  <dt>Step 4: Run the server and test</dt>
+  <dd>
+    Use the command: <code>python manage.py runserver</code><br>
+    Visit: <code>http://127.0.0.1:8000/profile/Kumar/25/</code><br>
+    Output: <code>Name: Kumar, Age: 25</code>
+  </dd>
+</dl>

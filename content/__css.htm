@@ -1,0 +1,98 @@
+<dl>
+  <dt>1. What is CSS?</dt>
+  <dd>
+    CSS stands for <strong>Cascading Style Sheets</strong>. It is used to style HTML elements — controlling layout, colors, fonts, spacing, and more.
+  </dd>
+
+  <dt>2. Ways to Apply CSS</dt>
+  <dd>
+    <ul>
+      <li><strong>Inline</strong>: Inside the HTML tag<br><code>&lt;h1 style="color:red;"&gt;Title&lt;/h1&gt;</code></li>
+      <li><strong>Internal</strong>: Inside <code>&lt;style&gt;</code> tag in HTML <code>&lt;head&gt;</code></li>
+      <li><strong>External</strong>: In a separate <code>style.css</code> file linked with <code>&lt;link rel="stylesheet" href="style.css"/&gt;</code> tag</li>
+    </ul>
+  </dd>
+
+  <dt>3. CSS Syntax</dt>
+  <dd>
+    <pre><code>
+selector {
+  property: value;
+}
+    </code></pre>
+    <strong>Example:</strong> <code>p { color: blue; font-size: 16px; }</code>
+  </dd>
+
+  <dt>4. Selectors</dt>
+  <dd>
+    <ul>
+      <li><code>*</code> – Universal selector</li>
+      <li><code>tag</code> – Element selector (e.g., <code>p</code>)</li>
+      <li><code>.class</code> – Class selector</li>
+      <li><code>#id</code> – ID selector</li>
+      <li><code>div > p</code> – Child selector</li>
+      <li><code>div p</code> – Descendant selector</li>
+    </ul>
+  </dd>
+
+  <dt>5. Properties</dt>
+  <dd>
+    Common properties:
+    <ul>
+      <li><code>color</code>, <code>background-color</code></li>
+      <li><code>font-size</code>, <code>font-family</code>, <code>font-weight</code></li>
+      <li><code>margin</code>, <code>padding</code></li>
+      <li><code>width</code>, <code>height</code></li>
+      <li><code>border</code>, <code>box-shadow</code></li>
+      <li><code>display</code>, <code>position</code>, <code>float</code></li>
+    </ul>
+  </dd>
+
+  <dt>6. Box Model</dt>
+  <dd>
+    Elements are boxes with: <strong>Content → Padding → Border → Margin</strong>.<br>
+    Use <code>box-sizing: border-box;</code> to include padding and border in width/height.
+  </dd>
+
+  <dt>7. Units</dt>
+  <dd>
+    <ul>
+      <li>Absolute: <code>px</code>, <code>cm</code>, <code>mm</code></li>
+      <li>Relative: <code>%</code>, <code>em</code>, <code>rem</code>, <code>vh</code>, <code>vw</code></li>
+    </ul>
+  </dd>
+
+  <dt>8. Responsive Design</dt>
+  <dd>
+    Use media queries to make layouts responsive:
+    <pre><code>
+@media (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+}
+    </code></pre>
+  </dd>
+
+  <dt>9. CSS Frameworks</dt>
+  <dd>
+    Popular frameworks include:
+    <ul>
+      <li>Bootstrap</li>
+      <li>Tailwind CSS</li>
+      <li>Materialize</li>
+    </ul>
+  </dd>
+
+  <dt>10. Animations and Transitions</dt>
+  <dd>
+    <pre><code>
+div {
+  transition: background-color 0.3s ease;
+}
+div:hover {
+  background-color: yellow;
+}
+    </code></pre>
+  </dd>
+</dl>

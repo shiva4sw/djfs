@@ -1,0 +1,129 @@
+[
+    {
+        "topic":"Full Stack Development",
+        "path":"ful_sta_dev"
+    },
+    {
+        "topic":"Introduction to Django Framework",
+        "path":"int_dja_fra"
+    },
+    {
+        "topic":"Django’s MVT Architecture",
+        "path":"dja_mvt_arc"
+    },
+    {
+        "topic":"VS Code Setup",
+        "path":"vs_cod_set"
+    },
+    {
+        "topic":"Setting Virtual Environment",
+        "path":"vir_env_set"
+    },
+    {
+        "topic":"Creating a Django Project",
+        "path":"cre_dja_pro"
+    },
+    {
+        "topic":"Creating Simple App",
+        "path":"cre_sim_app"
+    },
+    {
+        "topic":"Structure of a Django Project",
+        "path":"str_dja_pro"
+    },
+    {
+        "topic":"Push Code to Github Repository",
+        "path":"pus_cod_git"
+    },    
+    {
+        "topic":"Types of Views",
+        "path":"typ_of_vie"
+    },    
+    {
+        "topic":"Views with Parameters",
+        "path":"vie_wit_par"
+    },    
+    {
+        "topic":"Django Templates (HTML files)",
+        "path":"_dja_tem"
+    },    
+    {
+        "topic":"Template Tags",
+        "path":"_tem_tag"
+    },    
+    {
+        "topic":"Custom Template Tags",
+        "path":"cus_tem_tag"
+    },        
+    {
+        "topic":"Various Custom Template Tags",
+        "path":"var_cus_tem"
+    },        
+    {
+        "topic":"Static Files CSS or JS",
+        "path":"sta_fil_css"
+    },        
+    {
+        "topic":"Django Models",
+        "path":"_dja_mod"
+    },        
+    {
+        "topic":"Interacting with Shell for CRUD",
+        "path":"int_wit_she"
+    },        
+    {
+        "topic":"MySQL Database Configuration",
+        "path":"mys_dat_con"
+    },        
+    {
+        "topic":"Normal HTML Forms",
+        "path":"nor_htm_for"
+    },        
+    {
+        "topic":"Django Forms",
+        "path":"_dja_for"
+    },        
+    {
+        "topic":"Django Model Forms",
+        "path":"dja_mod_for"
+    },        
+    {
+        "topic":"Forms Validations",
+        "path":"_for_val"
+    },        
+    {
+        "topic":"Built-In Forms Validations",
+        "path":"bui_for_val"
+    },        
+    {
+        "topic":"Built-In Admin UI",
+        "path":"bui_adm_ui"
+    },        
+    {
+        "topic":"Customizing Admin UI",
+        "path":"cus_adm_ui"
+    },        
+    {
+        "topic":"HTML Basics",
+        "path":"_htm_bas"
+    },        
+    {
+        "topic":"HTML Form Elements",
+        "path":"htm_for_ele"
+    },        
+    {
+        "topic":"CSS",
+        "path":"__css"
+    },        
+    {
+        "topic":"Javascript",
+        "path":"__jav"
+    },        
+    {
+        "topic":"Javascript DOM",
+        "path":"_jav_dom"
+    },
+    {
+
+    }
+]

@@ -1,0 +1,92 @@
+<dl>
+  <dt>1. Why Customize the Admin?</dt>
+  <dd>
+    To improve usability for non-technical users, organize content, and add filters, search, styling, or even JavaScript.
+  </dd>
+
+  <dt>2. Basic Customization with <code>ModelAdmin</code></dt>
+  <dd>
+    In <code>admin.py</code>, define a custom class:
+    <pre><code>
+from django.contrib import admin
+from .models import Product
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'stock')
+    list_filter = ('price',)
+    search_fields = ('name',)
+    ordering = ('-price',)
+    readonly_fields = ('created_at',)
+    fields = ('name', 'price', 'stock', 'description')  # control field layout
+
+admin.site.register(Product, ProductAdmin)
+    </code></pre>
+  </dd>
+
+  <dt>3. Using <code>fieldsets</code> for Grouping Fields</dt>
+  <dd>
+    <pre><code>
+fieldsets = (
+    ('Basic Info', {
+        'fields': ('name', 'price')
+    }),
+    ('Additional Info', {
+        'fields': ('stock', 'description')
+    }),
+)
+    </code></pre>
+  </dd>
+
+  <dt>4. Adding Custom CSS and JavaScript</dt>
+  <dd>
+    Override admin templates or add static files:
+    <pre><code>
+class ProductAdmin(admin.ModelAdmin):
+    class Media:
+        css = {
+            'all': ('css/custom_admin.css',)
+        }
+        js = ('js/custom_admin.js',)
+    </code></pre>
+    Place these files in your app’s <code>static/css/</code> and <code>static/js/</code> folders.
+  </dd>
+
+  <dt>5. Customize List Page Columns</dt>
+  <dd>
+    Add functions to <code>list_display</code>:
+    <pre><code>
+def is_in_stock(self, obj):
+    return obj.stock > 0
+is_in_stock.boolean = True  # shows checkmark
+
+list_display = ('name', 'price', 'is_in_stock')
+    </code></pre>
+  </dd>
+
+  <dt>6. Inlines for Related Models</dt>
+  <dd>
+    Show related models inline (e.g., OrderItems in Order):
+    <pre><code>
+from .models import Order, OrderItem
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 1
+
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [OrderItemInline]
+
+admin.site.register(Order, OrderAdmin)
+    </code></pre>
+  </dd>
+
+  <dt>7. Overriding Admin Templates</dt>
+  <dd>
+    You can override admin base templates:
+    <ul>
+      <li>Copy template from <code>django/contrib/admin/templates/admin/base.html</code></li>
+      <li>Place it inside your app: <code>templates/admin/base.html</code></li>
+      <li>Customize with your branding, navbar, footer, etc.</li>
+    </ul>
+  </dd>
+</dl>

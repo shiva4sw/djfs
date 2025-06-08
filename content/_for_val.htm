@@ -1,0 +1,87 @@
+<dl>
+  <dt>1. Using Django Form Validations (Recommended)</dt>
+  <dd>
+    <pre><code>
+# forms.py
+from django import forms
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        if any(char.isdigit() for char in name):
+            raise forms.ValidationError("Name should not contain numbers.")
+        return name
+    </code></pre>
+  </dd>
+
+  <dt>2. Use the Form in the View</dt>
+  <dd>
+    <pre><code>
+# views.py
+from django.shortcuts import render
+from .forms import ContactForm
+
+def contact_view(request):
+    form = ContactForm(request.POST or None)
+    if form.is_valid():
+        # Process data
+        return render(request, 'thanks.html', {'name': form.cleaned_data['name']})
+    return render(request, 'contact.html', {'form': form})
+    </code></pre>
+  </dd>
+
+  <dt>3. HTML Template with Errors</dt>
+  <dd>
+    <pre><code>
+&lt;h2&gt;Contact Us&lt;/h2&gt;
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    &lt;p&gt;{{ form.name.label }} {{ form.name }} {{ form.name.errors }}&lt;/p&gt;
+    &lt;p&gt;{{ form.email.label }} {{ form.email }} {{ form.email.errors }}&lt;/p&gt;
+    &lt;p&gt;{{ form.message.label }} {{ form.message }} {{ form.message.errors }}&lt;/p&gt;
+    &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+    </code></pre>
+  </dd>
+
+  <dt>4. Validation in Raw HTML Forms (Less Secure)</dt>
+  <dd>
+    <pre><code>
+# views.py
+def feedback_view(request):
+    error = ""
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        if not name:
+            error = "Name is required"
+        elif any(char.isdigit() for char in name):
+            error = "Name cannot have numbers"
+        else:
+            return render(request, 'thanks.html', {'name': name})
+    return render(request, 'feedback.html', {'error': error})
+    </code></pre>
+    <pre><code>
+# feedback.html
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    {% if error %}&lt;p style="color:red"&gt;{{ error }}&lt;/p&gt;{% endif %}
+    &lt;input type="text" name="name" placeholder="Your name"&gt;
+    &lt;input type="submit" value="Send"&gt;
+&lt;/form&gt;
+    </code></pre>
+  </dd>
+
+  <dt>5. Built-in Field Validations</dt>
+  <dd>
+    <ul>
+      <li><code>required=True</code> (default): field must be filled</li>
+      <li><code>max_length</code>, <code>min_length</code></li>
+      <li><code>EmailField</code>, <code>URLField</code>, <code>IntegerField</code> etc. provide auto validation</li>
+    </ul>
+  </dd>
+</dl>

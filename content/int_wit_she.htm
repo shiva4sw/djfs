@@ -1,0 +1,131 @@
+<dl>
+  <dt>1. Open the Django Shell</dt>
+  <dd>
+    Use this command:
+    <pre><code>python manage.py shell</code></pre>
+  </dd>
+
+  <dt>2. Import Your Model</dt>
+  <dd>
+    Assuming your model is named <code>Product</code> in an app called <code>myapp</code>:
+    <pre><code>from myapp.models import Product</code></pre>
+  </dd>
+
+  <dt>3. Create (Insert) a New Object</dt>
+  <dd>
+    <pre><code>
+product = Product(name="Book", price=199.99, stock=50)
+product.save()
+    </code></pre>
+    or simply:
+    <pre><code>
+Product.objects.create(name="Pen", price=9.99, stock=100)
+    </code></pre>
+  </dd>
+
+  <dt>4. Read (Retrieve) Objects</dt>
+  <dd>
+    <ul>
+      <li>All Products:
+        <pre><code>Product.objects.all()</code></pre>
+      </li>
+      <li>First Product:
+        <pre><code>Product.objects.first()</code></pre>
+      </li>
+      <li>Get by ID or Field:
+        <pre><code>Product.objects.get(id=1)</code></pre>
+        <pre><code>Product.objects.get(name="Book")</code></pre>
+      </li>
+      <li>Filter Products:
+        <pre><code>Product.objects.filter(price__lt=100)</code></pre>
+      </li>
+    </ul>
+  </dd>
+
+  <dt>5. Update an Object</dt>
+  <dd>
+    <pre><code>
+p = Product.objects.get(id=1)
+p.price = 149.99
+p.save()
+    </code></pre>
+    Or update multiple rows:
+    <pre><code>
+Product.objects.filter(stock=0).update(stock=10)
+    </code></pre>
+  </dd>
+
+  <dt>6. Delete an Object</dt>
+  <dd>
+    <pre><code>
+p = Product.objects.get(id=1)
+p.delete()
+    </code></pre>
+    Delete multiple:
+    <pre><code>
+Product.objects.filter(price__lt=10).delete()
+    </code></pre>
+  </dd>
+
+  <dt>7. For Relationship</dt>
+  <dd>
+    <ul>
+      <li><strong>Open Shell</strong>:
+        <pre><code>python manage.py shell</code></pre>
+      </li>
+      <li><strong>Import Models</strong>:
+        <pre><code>
+from store.models import Product, Category
+        </code></pre>
+      </li>
+
+      <li><strong>Create Category</strong>:
+        <pre><code>
+cat = Category.objects.create(name="Books")
+        </code></pre>
+      </li>
+
+      <li><strong>Create Product Linked to Category</strong>:
+        <pre><code>
+Product.objects.create(name="Python Guide", price=299.99, category=cat)
+        </code></pre>
+      </li>
+
+      <li><strong>Read Product with Category</strong>:
+        <pre><code>
+p = Product.objects.get(name="Python Guide")
+print(p.category.name)
+        </code></pre>
+      </li>
+
+      <li><strong>Get All Products in a Category</strong>:
+        <pre><code>
+cat = Category.objects.get(name="Books")
+cat.product_set.all()  # reverse relationship
+        </code></pre>
+      </li>
+
+      <li><strong>Update Product's Category</strong>:
+        <pre><code>
+new_cat = Category.objects.create(name="Programming")
+p.category = new_cat
+p.save()
+        </code></pre>
+      </li>
+    </ul>
+  </dd>
+
+  <dt>8. Deleting a Category</dt>
+  <dd>
+    If you delete a category, all its related products will be deleted (because of <code>on_delete=models.CASCADE</code>).
+  </dd>
+
+  <dt>9. Migration Reminder</dt>
+  <dd class="info">
+    Always run, if any changes in Models:
+    <pre><code style="background-color: grey;">
+python manage.py makemigrations
+python manage.py migrate
+    </code></pre>
+  </dd>
+</dl>

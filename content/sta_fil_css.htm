@@ -1,0 +1,68 @@
+<dl>
+  <dt>1. Set <code>DEBUG = False</code> in <code>settings.py</code></dt>
+  <dd>
+    <pre><code>
+DEBUG = False
+ALLOWED_HOSTS = ['yourdomain.com', 'localhost']
+    </code></pre>
+  </dd>
+
+  <dt>2. Define <code>STATIC_ROOT</code> in <code>settings.py</code></dt>
+  <dd>
+    This is the folder where Django will collect all static files for production.
+    <pre><code>
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+    </code></pre>
+  </dd>
+
+  <dt>3. Run <code>collectstatic</code></dt>
+  <dd>
+    This command collects all your app static files into <code>STATIC_ROOT</code>.
+    <pre><code>
+python manage.py collectstatic
+    </code></pre>
+  </dd>
+
+  <dt>4. Serve Static Files with Web Server (e.g., Nginx or WhiteNoise)</dt>
+  <dd>
+    Django won't serve static files with <code>DEBUG=False</code>.<br>
+    You have 2 options:
+    <ul>
+      <li><strong>Option A: Use WhiteNoise</strong> – simple for small deployments.</li>
+      <li><strong>Option B: Use Nginx/Apache</strong> – preferred for production.</li>
+    </ul>
+  </dd>
+
+  <dt>5. Option A: Use WhiteNoise Middleware (simplest)</dt>
+  <dd>
+    Install WhiteNoise:
+    <pre><code>
+pip install whitenoise
+    </code></pre>
+    Add to <code>MIDDLEWARE</code> in <code>settings.py</code>:
+    <pre><code>
+MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    ...
+]
+    </code></pre>
+    Then add:
+    <pre><code>
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    </code></pre>
+  </dd>
+
+  <dt>6. Use CSS in Template</dt>
+  <dd>
+    <pre><code>
+{% load static %}
+&lt;link rel="stylesheet" href="{% static 'myapp/style.css' %}"&gt;
+    </code></pre>
+  </dd>
+
+  <dt>7. Use Template Inside Deployed HTML</dt>
+  <dd>
+    Ensure the CSS path still refers to `{% static %}` and that collected static files are being served from `/static/` path correctly by your web server.
+  </dd>
+</dl>

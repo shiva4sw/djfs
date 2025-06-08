@@ -1,0 +1,61 @@
+<dl>
+  <dt>1. Create a Folder for Template Tags</dt>
+  <dd>
+    Inside your Django app (e.g., <code>shop</code>), create a folder named <code>templatetags</code>:
+    <pre>
+shop/
+├── templatetags/
+│   └── product_tags.py
+    </pre>
+  </dd>
+
+  <dt>2. Define the Custom Tag</dt>
+  <dd>
+    In <code>product_tags.py</code>:
+    <pre><code>
+from django import template
+from shop.models import Product  # replace with your actual model
+
+register = template.Library()
+
+@register.simple_tag
+def get_product_info(product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        return f"{product.name} - ₹{product.price}"
+    except Product.DoesNotExist:
+        return "Product not found"
+    </code></pre>
+  </dd>
+
+  <dt>3. Load the Custom Tag in Your Template</dt>
+  <dd>
+    At the top of your template file:
+    <pre><code>{% load product_tags %}</code></pre>
+  </dd>
+
+  <dt>4. Use the Tag in Template</dt>
+  <dd>
+    <pre><code>{% get_product_info 5 %}</code></pre>
+    This will display something like: <code>iPhone 15 - ₹79999</code>
+  </dd>
+
+  <dt>5. Optional - Tag with HTML Output</dt>
+  <dd>
+    You can return HTML and mark it as safe:
+    <pre><code>
+from django.utils.safestring import mark_safe
+
+@register.simple_tag
+def render_product_card(product_id):
+    try:
+        p = Product.objects.get(id=product_id)
+        html = f"&lt;div class='card'&gt;&lt;h3&gt;{p.name}&lt;/h3&gt;&lt;p&gt;₹{p.price}&lt;/p&gt;&lt;/div&gt;"
+        return mark_safe(html)
+    except Product.DoesNotExist:
+        return "Product not found"
+    </code></pre>
+    Use it like:
+    <pre><code>{% render_product_card 5 %}</code></pre>
+  </dd>
+</dl>

@@ -1,0 +1,70 @@
+<dl>
+  <dt>1. &lt;form&gt;</dt>
+  <dd>The container element for form controls. Attributes: <code>action</code>, <code>method</code> (GET or POST), <code>autocomplete</code>, etc.</dd>
+
+  <dt>2. &lt;input&gt;</dt>
+  <dd>
+    HTML5 introduced many new <code>type</code> values for <code>&lt;input&gt;</code>:
+    <ul>
+      <li><code>text</code> – Single-line text input</li>
+      <li><code>email</code> – Validates email format</li>
+      <li><code>url</code> – Validates URLs</li>
+      <li><code>tel</code> – Telephone numbers</li>
+      <li><code>number</code> – Numeric input with min/max</li>
+      <li><code>range</code> – Slider control</li>
+      <li><code>date</code> – Date picker</li>
+      <li><code>time</code> – Time picker</li>
+      <li><code>datetime-local</code> – Local datetime picker</li>
+      <li><code>month</code> – Month picker</li>
+      <li><code>color</code> – Color picker</li>
+      <li><code>search</code> – Styled for search input</li>
+    </ul>
+  </dd>
+
+  <dt>3. &lt;textarea&gt;</dt>
+  <dd>For multi-line text input.</dd>
+
+  <dt>4. &lt;select&gt; and &lt;option&gt;</dt>
+  <dd>Dropdown list of options. Use <code>multiple</code> to allow multiple selections.</dd>
+
+  <dt>5. &lt;datalist&gt;</dt>
+  <dd>
+    Provides autocomplete suggestions for an <code>&lt;input&gt;</code> element.
+    <pre><code>
+&lt;input list="browsers"&gt;
+&lt;datalist id="browsers"&gt;
+  &lt;option value="Chrome"&gt;
+  &lt;option value="Firefox"&gt;
+&lt;/datalist&gt;
+    </code></pre>
+  </dd>
+
+  <dt>6. &lt;fieldset&gt; and &lt;legend&gt;</dt>
+  <dd>Group related fields together with a label.</dd>
+
+  <dt>7. &lt;label&gt;</dt>
+  <dd>Defines a label for an input. Use <code>for</code> attribute to bind it to an <code>id</code>.</dd>
+
+  <dt>8. &lt;button&gt;</dt>
+  <dd>Can be <code>submit</code>, <code>reset</code>, or just a button to trigger JS.</dd>
+
+  <dt>9. Validation Attributes</dt>
+  <dd>
+    <ul>
+      <li><code>required</code> – Field must be filled out</li>
+      <li><code>pattern</code> – Regex validation</li>
+      <li><code>min</code>, <code>max</code> – Range limits</li>
+      <li><code>step</code> – Specifies legal number intervals</li>
+      <li><code>maxlength</code>, <code>minlength</code> – Text length limits</li>
+    </ul>
+  </dd>
+
+  <dt>10. Autofocus, Placeholder, Disabled</dt>
+  <dd>
+    <ul>
+      <li><code>autofocus</code> – Automatically focuses on the input</li>
+      <li><code>placeholder</code> – Displays hint text</li>
+      <li><code>disabled</code> – Makes field uneditable</li>
+    </ul>
+  </dd>
+</dl>

@@ -1,0 +1,73 @@
+<dl>
+  <dt>1. What Are Built-in Validations?</dt>
+  <dd>
+    Django forms provide built-in validation logic based on the field type and attributes like <code>required</code>, <code>max_length</code>, etc.
+  </dd>
+
+  <dt>2. Common Field-Level Validations</dt>
+  <dd>
+    These validations are automatically applied by Django based on the field type or field parameters:
+    <ul>
+      <li><strong>CharField:</strong> <code>required</code>, <code>max_length</code>, <code>min_length</code></li>
+      <li><strong>EmailField:</strong> checks for a valid email format</li>
+      <li><strong>URLField:</strong> checks for a valid URL</li>
+      <li><strong>IntegerField:</strong> ensures numeric input</li>
+      <li><strong>BooleanField:</strong> allows only True/False</li>
+    </ul>
+  </dd>
+
+  <dt>3. Example Using <code>forms.Form</code></dt>
+  <dd>
+    <pre><code>
+from django import forms
+
+class RegisterForm(forms.Form):
+    username = forms.CharField(max_length=20, min_length=5, required=True)
+    email = forms.EmailField(required=True)
+    age = forms.IntegerField(min_value=18, max_value=100)
+    website = forms.URLField(required=False)
+    </code></pre>
+  </dd>
+
+  <dt>4. Example Using <code>forms.ModelForm</code></dt>
+  <dd>
+    <pre><code>
+from django.db import models
+from django import forms
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    stock = models.PositiveIntegerField()
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = '__all__'
+    </code></pre>
+    Django automatically applies validation rules like:
+    <ul>
+      <li><code>max_length</code> for CharField</li>
+      <li><code>decimal_places</code> and <code>max_digits</code> for DecimalField</li>
+      <li><code>PositiveIntegerField</code> ensures only positive numbers</li>
+    </ul>
+  </dd>
+
+  <dt>5. Required vs Optional Fields</dt>
+  <dd>
+    By default, all fields are required. To make optional:
+    <pre><code>email = forms.EmailField(required=False)</code></pre>
+  </dd>
+
+  <dt>6. HTML Template Usage</dt>
+  <dd>
+    <pre><code>
+&lt;form method="post"&gt;
+  {% csrf_token %}
+  {{ form.as_p }}
+  &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+    </code></pre>
+    Errors will automatically show when using <code>{{ form.field.errors }}</code> or <code>{{ form.as_p }}</code>.
+  </dd>
+</dl>

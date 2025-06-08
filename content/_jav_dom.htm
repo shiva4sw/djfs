@@ -1,0 +1,85 @@
+<dl>
+  <dt>1. What is the DOM?</dt>
+  <dd>
+    DOM stands for Document Object Model. It represents the HTML page as a tree of objects that JavaScript can interact with to change content, style, or structure.
+  </dd>
+
+  <dt>2. Accessing Elements</dt>
+  <dd>
+    You can access HTML elements using methods like:
+    <ul>
+      <li><code>document.getElementById("id")</code></li>
+      <li><code>document.getElementsByClassName("class")</code></li>
+      <li><code>document.getElementsByTagName("tag")</code></li>
+      <li><code>document.querySelector("selector")</code></li>
+      <li><code>document.querySelectorAll("selector")</code></li>
+    </ul>
+  </dd>
+
+  <dt>3. Changing Content</dt>
+  <dd>
+    Use <code>innerHTML</code> or <code>innerText</code>:
+    <pre><code>
+document.getElementById("demo").innerHTML = "Hello, DOM!";
+    </code></pre>
+  </dd>
+
+  <dt>4. Changing Attributes</dt>
+  <dd>
+    <pre><code>
+document.getElementById("image").src = "new-image.jpg";
+document.getElementById("link").href = "https://example.com";
+    </code></pre>
+  </dd>
+
+  <dt>5. Changing Styles</dt>
+  <dd>
+    <pre><code>
+document.getElementById("box").style.backgroundColor = "yellow";
+    </code></pre>
+  </dd>
+
+  <dt>6. Event Handling</dt>
+  <dd>
+    JavaScript can respond to events like clicks, inputs, etc.
+    <pre><code>
+document.getElementById("btn").onclick = function() {
+  alert("Button clicked!");
+};
+    </code></pre>
+  </dd>
+
+  <dt>7. Creating Elements</dt>
+  <dd>
+    <pre><code>
+let p = document.createElement("p");
+p.innerText = "This is a new paragraph.";
+document.body.appendChild(p);
+    </code></pre>
+  </dd>
+
+  <dt>8. Removing Elements</dt>
+  <dd>
+    <pre><code>
+let el = document.getElementById("demo");
+el.remove(); // Or: el.parentNode.removeChild(el);
+    </code></pre>
+  </dd>
+
+  <dt>9. Input Handling</dt>
+  <dd>
+    <pre><code>
+let value = document.getElementById("username").value;
+alert("Hello " + value);
+    </code></pre>
+  </dd>
+
+  <dt>10. DOM Tree</dt>
+  <dd>
+    HTML is represented as a tree of nodes:
+    <ul>
+      <li><strong>Document</strong> → <strong>html</strong> → <strong>head</strong>, <strong>body</strong></li>
+      <li>Each element is a node and can be accessed/modified using DOM</li>
+    </ul>
+  </dd>
+</dl>

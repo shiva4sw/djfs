@@ -1,0 +1,47 @@
+<h2>Structure of a Djnago Project</h2>
+
+<dl>
+  <dt>1. manage.py</dt>
+  <dd>
+    A command-line utility that lets you interact with this Django project. You use it to run the server, migrations, create apps, etc.
+  </dd>
+
+  <dt>2. Project Folder (e.g., <code>myproject/</code>)</dt>
+  <dd>
+    Contains the main project settings and configuration files:
+    <ul>
+      <li><code>__init__.py</code> - Marks this directory as a Python package.</li>
+      <li><code>settings.py</code> - Configuration for the entire project (database, installed apps, middleware, etc.).</li>
+      <li><code>urls.py</code> - URL declarations for this project; routes URLs to views.</li>
+      <li><code>wsgi.py</code> - Entry point for WSGI-compatible web servers to serve your project.</li>
+      <li><code>asgi.py</code> - Entry point for ASGI-compatible servers (for async support).</li>
+    </ul>
+  </dd>
+
+  <dt>3. App Folder(s) (e.g., <code>myapp/</code>)</dt>
+  <dd>
+    Each app contains specific functionality. A project can have multiple apps.<br>
+    Typical files inside an app:
+    <ul>
+      <li><code>models.py</code> - Defines data models.</li>
+      <li><code>views.py</code> - Contains the views (business logic).</li>
+      <li><code>urls.py</code> (optional) - App-specific URL routing.</li>
+      <li><code>admin.py</code> - Registers models with the Django admin.</li>
+      <li><code>apps.py</code> - App configuration.</li>
+      <li><code>tests.py</code> - Test cases for the app.</li>
+      <li><code>migrations/</code> - Database migration files.</li>
+      <li><code>templates/</code> (optional) - HTML templates related to the app.</li>
+      <li><code>static/</code> (optional) - Static files like CSS, JS, images.</li>
+    </ul>
+  </dd>
+
+  <dt>4. Other Important Files</dt>
+  <dd>
+    <ul>
+      <li><code>db.sqlite3</code> - Default SQLite database file (if used).</li>
+      <li><code>requirements.txt</code> - Lists Python dependencies.</li>
+      <li><code>README.md</code> - Project documentation.</li>
+      <li><code>.gitignore</code> - Git ignore rules.</li>
+    </ul>
+  </dd>
+</dl>

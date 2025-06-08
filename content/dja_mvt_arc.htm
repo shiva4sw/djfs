@@ -1,0 +1,43 @@
+<h2>Django’s MVT Architecture</h2>
+
+<dl>
+  <dt>1. What is MVT Architecture?</dt>
+  <dd>
+    MVT stands for <strong>Model-View-Template</strong>, a design pattern Django follows that is similar to MVC (Model-View-Controller).
+  </dd>
+
+  <dt>2. Components of MVT</dt>
+  <dd>
+    <ul>
+      <li><strong>Model:</strong> Defines the data structure. It is the interface to the database and handles data logic. Each model corresponds to a database table.</li>
+      <li><strong>View:</strong> Handles business logic and interacts with the Model. It processes requests, fetches data, and returns a response (often rendering a Template).</li>
+      <li><strong>Template:</strong> Deals with presentation logic. It defines how data is displayed, i.e., the HTML markup combined with Django Template Language (DTL).</li>
+    </ul>
+  </dd>
+
+  <dt>3. How MVT Works</dt>
+  <dd>
+    <ol>
+      <li>User sends a request to the Django app.</li>
+      <li>The URL dispatcher maps the request to the appropriate View.</li>
+      <li>The View accesses the Model to retrieve or update data.</li>
+      <li>The View passes data to the Template.</li>
+      <li>The Template renders the data into HTML.</li>
+      <li>The rendered HTML is sent back as the HTTP response to the user.</li>
+    </ol>
+  </dd>
+
+  <dt>4. Difference Between MVC and MVT</dt>
+  <dd>
+    <ul>
+      <li>In MVC, the Controller handles user input and interacts with Model and View.</li>
+      <li>In Django’s MVT, the View acts as the Controller (handles logic and user requests), while the Template is the View (presentation).</li>
+      <li>Django’s framework manages the Controller part internally via its URL dispatcher.</li>
+    </ul>
+  </dd>
+
+  <dt>5. Diagram (simplified)</dt>
+  <dd>
+    User Request &rarr; URL Dispatcher &rarr; View &rarr; Model (data) &rarr; View &rarr; Template &rarr; User Response
+  </dd>
+</dl>

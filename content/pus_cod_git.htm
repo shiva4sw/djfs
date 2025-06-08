@@ -1,0 +1,58 @@
+<dl>
+  <dt>1. Initialize Git (if not already)</dt>
+  <dd>
+    <pre><code>
+git init
+    </code></pre>
+    This initializes a new Git repository in your project folder.
+  </dd>
+
+  <dt>2. Add Remote Repository</dt>
+  <dd>
+    <pre><code>
+git remote add origin https://github.com/your-username/your-repo.git
+    </code></pre>
+    Replace the URL with your actual GitHub repository link.
+  </dd>
+
+  <dt>3. Add Files</dt>
+  <dd>
+    <pre><code>
+git add .
+    </code></pre>
+    This stages all files for commit.
+  </dd>
+
+  <dt>4. Commit Changes</dt>
+  <dd>
+    <pre><code>
+git commit -m "Initial commit"
+    </code></pre>
+    Replace the commit message with a meaningful description.
+  </dd>
+
+  <dt>5. Push Code</dt>
+  <dd>
+    <pre><code>
+git push -u origin main
+    </code></pre>
+    Use <code>main</code> if your default branch is named `main`. Use <code>master</code> if it's `master`.
+  </dd>
+
+  <dt>6. If the Branch Doesn’t Exist</dt>
+  <dd>
+    You can create and push a new branch:
+    <pre><code>
+git checkout -b main
+git push -u origin main
+    </code></pre>
+  </dd>
+
+  <dt>7. Common Issues</dt>
+  <dd>
+    <ul>
+      <li><strong>Authentication Error:</strong> Use GitHub CLI or personal access token</li>
+      <li><strong>Remote Already Exists:</strong> <code>git remote set-url origin &lt;new-url&gt;</code></li>
+    </ul>
+  </dd>
+</dl>

@@ -1,0 +1,61 @@
+<dl>
+  <dt>1. What are Template Tags?</dt>
+  <dd>
+    Django template tags are special syntax enclosed in <code>{% ... %}</code> used to implement logic (like loops, conditionals) inside templates(HTML files).
+  </dd>
+
+  <dt>2. Variable Tags</dt>
+  <dd>
+    Use <code>{{ variable_name }}</code> to display the value of a variable passed from a view.<br>
+    <strong>Example:</strong> <code>{{ user.username }}</code>
+  </dd>
+
+  <dt>3. Common Built-in Template Tags</dt>
+  <dd>
+    <ul>
+      <li><strong>{% if %}</strong> - Used for conditional logic.</li>
+      <li><strong>{% for %}</strong> - Used for looping over a list.</li>
+      <li><strong>{% block %}</strong> - Marks a block in base templates for inheritance.</li>
+      <li><strong>{% extends %}</strong> - Inherits from a parent template.</li>
+      <li><strong>{% include %}</strong> - Includes another template file.</li>
+      <li><strong>{% csrf_token %}</strong> - Protects against CSRF attacks in forms.</li>
+      <li><strong>{% url %}</strong> - Resolves view names into URLs.</li>
+      <li><strong>{% load %}</strong> - Loads custom tags or filters.</li>
+    </ul>
+  </dd>
+
+  <dt>4. Example: Conditional & Loop Tags</dt>
+  <dd>
+    <pre><code>{% raw %}
+{% if user.is_authenticated %}
+  Hello, {{ user.username }}
+{% else %}
+  Hello, guest!
+{% endif %}
+
+
+{% for item in items %}
+  {{ item }}
+{% endfor %}
+
+{% endraw %}</code></pre>
+  </dd>
+
+  <dt>5. Example: Template Inheritance</dt>
+  <dd>
+    <pre><code><b>base.html</b>
+{% raw %}
+&lt;html&gt;
+  &lt;body&gt;
+    {% block content %}{% endblock %}
+  &lt;/body&gt;
+&lt;/html&gt;
+
+<b>child.html</b>
+{% extends "base.html" %}
+{% block content %}
+  &lt;h1&gt;Welcome to the site!&lt;/h1&gt;
+{% endblock %}
+{% endraw %}</code></pre>
+  </dd>
+</dl>

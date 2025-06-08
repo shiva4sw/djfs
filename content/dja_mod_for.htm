@@ -1,0 +1,88 @@
+<dl>
+  <dt>1. What are ModelForms?</dt>
+  <dd>
+    <code>ModelForm</code> automatically creates a form based on a Django model. It saves time by linking form fields directly to model fields.
+  </dd>
+
+  <dt>2. Create a Model</dt>
+  <dd>
+    In <code>models.py</code>:
+    <pre><code>
+from django.db import models
+
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
+    stock = models.PositiveIntegerField()
+    description = models.TextField(blank=True)
+    </code></pre>
+  </dd>
+
+  <dt>3. Create a ModelForm</dt>
+  <dd>
+    In <code>forms.py</code>:
+    <pre><code>
+from django import forms
+from .models import Product
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['name', 'price', 'stock', 'description']
+    </code></pre>
+  </dd>
+
+  <dt>4. Use the Form in a View</dt>
+  <dd>
+    In <code>views.py</code>:
+    <pre><code>
+from django.shortcuts import render, redirect
+from .forms import ProductForm
+
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('product_success')
+    else:
+        form = ProductForm()
+    return render(request, 'add_product.html', {'form': form})
+    </code></pre>
+  </dd>
+
+  <dt>5. Create a Template</dt>
+  <dd>
+    In <code>add_product.html</code>:
+    <pre><code>
+&lt;h2&gt;Add Product&lt;/h2&gt;
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    {{ form.as_p }}
+    &lt;input type="submit" value="Save"&gt;
+&lt;/form&gt;
+    </code></pre>
+  </dd>
+
+  <dt>6. URL Mapping</dt>
+  <dd>
+    In <code>urls.py</code>:
+    <pre><code>
+from django.urls import path
+from .views import add_product
+
+urlpatterns = [
+    path('add/', add_product, name='add_product'),
+]
+    </code></pre>
+  </dd>
+
+  <dt>7. Benefits of ModelForm</dt>
+  <dd>
+    <ul>
+      <li>Less boilerplate code</li>
+      <li>Auto validation based on model fields</li>
+      <li>Form can be used to create or update model instances</li>
+    </ul>
+  </dd>
+</dl>

@@ -1,0 +1,24 @@
+<h2>Steps to Create virtualenv</h2>
+<dl>
+  <dt>Step 1: Install virtualenv (optional if using venv)</dt>
+  <dd>Run <code>pip install virtualenv</code> if you're using <code>virtualenv</code> instead of the built-in <code>venv</code> (Python 3.3+).</dd>
+
+  <dt>Step 2: Create virtual environment</dt>
+  <dd>
+    Use one of the following commands:<br>
+    - <code>python -m venv env_name</code> (recommended for Python 3)<br>
+    - <code>virtualenv env_name</code> (if using virtualenv)
+  </dd>
+
+  <dt>Step 3: Activate virtual environment</dt>
+  <dd>
+    On Windows: <code>env_name\Scripts\activate</code><br>
+    On macOS/Linux: <code>source env_name/bin/activate</code>
+  </dd>
+
+  <dt>Step 4: Install packages</dt>
+  <dd>Run <code>pip install package_name</code> inside the activated environment.</dd>
+
+  <dt>Step 5: Deactivate environment</dt>
+  <dd>Run <code>deactivate</code> to exit the virtual environment.</dd>
+</dl>

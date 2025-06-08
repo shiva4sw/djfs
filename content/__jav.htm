@@ -1,0 +1,96 @@
+<dl>
+  <dt>1. What is JavaScript?</dt>
+  <dd>
+    JavaScript is a scripting language used to make web pages interactive. It can update content, validate forms, handle events, and much more.
+  </dd>
+
+  <dt>2. How to Add JavaScript to HTML</dt>
+  <dd>
+    <ul>
+      <li><strong>Inline:</strong> <code>&lt;button onclick="alert('Hello!')"&gt;</code></li>
+      <li><strong>Internal:</strong> Inside <code>&lt;script&gt;</code> tags in HTML</li>
+      <li><strong>External:</strong> In a <code>.js</code> file linked using <code>&lt;script src="file.js"&gt;</code></li>
+    </ul>
+  </dd>
+
+  <dt>3. Basic Syntax</dt>
+  <dd>
+    <pre><code>
+let name = "John";
+const age = 25;
+alert("Hello, " + name);
+    </code></pre>
+  </dd>
+
+  <dt>4. Variables</dt>
+  <dd>
+    <ul>
+      <li><code>var</code> – old, function-scoped</li>
+      <li><code>let</code> – modern, block-scoped</li>
+      <li><code>const</code> – block-scoped, cannot be reassigned</li>
+    </ul>
+  </dd>
+
+  <dt>5. Data Types</dt>
+  <dd>
+    <ul>
+      <li>String</li>
+      <li>Number</li>
+      <li>Boolean</li>
+      <li>Array</li>
+      <li>Object</li>
+      <li>null and undefined</li>
+    </ul>
+  </dd>
+
+  <dt>6. Functions</dt>
+  <dd>
+    <pre><code>
+function greet(name) {
+  return "Hello, " + name;
+}
+console.log(greet("Alice"));
+    </code></pre>
+  </dd>
+
+  <dt>7. Events</dt>
+  <dd>
+    JavaScript reacts to user actions (click, hover, input).
+    <pre><code>
+document.getElementById("btn").onclick = function() {
+  alert("Clicked!");
+};
+    </code></pre>
+  </dd>
+
+  <dt>8. DOM Manipulation</dt>
+  <dd>
+    <pre><code>
+document.getElementById("title").innerText = "New Title";
+    </code></pre>
+  </dd>
+
+  <dt>9. Conditions and Loops</dt>
+  <dd>
+    <pre><code>
+if (age > 18) {
+  alert("Adult");
+} else {
+  alert("Minor");
+}
+
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+    </code></pre>
+  </dd>
+
+  <dt>10. Arrays and Objects</dt>
+  <dd>
+    <pre><code>
+let colors = ["red", "green", "blue"];
+let person = { name: "Alice", age: 22 };
+console.log(person.name);
+    </code></pre>
+  </dd>
+</dl>

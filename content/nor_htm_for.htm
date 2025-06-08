@@ -1,0 +1,59 @@
+<dl>
+  <dt>1. Create a View in <code>views.py</code></dt>
+  <dd>
+    <pre><code>
+from django.shortcuts import render
+
+def feedback_view(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        message = request.POST.get('message')
+        return render(request, 'thanks.html', {'name': name, 'message': message})
+    return render(request, 'feedback.html')
+    </code></pre>
+  </dd>
+
+  <dt>2. Create HTML Form in <code>feedback.html</code></dt>
+  <dd>
+    <pre><code>
+&lt;h2&gt;Feedback Form&lt;/h2&gt;
+&lt;form method="post"&gt;
+    {% csrf_token %}
+    &lt;label&gt;Name:&lt;/label&gt;
+    &lt;input type="text" name="name"&gt;&lt;br&gt;&lt;br&gt;
+
+    &lt;label&gt;Message:&lt;/label&gt;&lt;br&gt;
+    &lt;textarea name="message"&gt;&lt;/textarea&gt;&lt;br&gt;&lt;br&gt;
+
+    &lt;input type="submit" value="Send Feedback"&gt;
+&lt;/form&gt;
+    </code></pre>
+  </dd>
+
+  <dt>3. Create Response Template in <code>thanks.html</code></dt>
+  <dd>
+    <pre><code>
+&lt;h2&gt;Thank You, {{ name }}!&lt;/h2&gt;
+&lt;p&gt;Your message: {{ message }}&lt;/p&gt;
+    </code></pre>
+  </dd>
+
+  <dt>4. Add URL in <code>urls.py</code></dt>
+  <dd>
+    <pre><code>
+from django.urls import path
+from .views import feedback_view
+
+urlpatterns = [
+    path('feedback/', feedback_view, name='feedback'),
+]
+    </code></pre>
+  </dd>
+
+  <dt>5. Notes</dt>
+  <dd class="info">
+    - The form uses <code>method="post"</code> for secure data submission.<br>
+    - Use <code>{% csrf_token %}</code> to protect against CSRF attacks.<br>
+    - You can change <code>method="get"</code> if you want to pass data in the URL.
+  </dd>
+</dl>

@@ -1,0 +1,73 @@
+<dl>
+  <dt>1. What is Django Admin?</dt>
+  <dd>
+    Django Admin is a built-in web interface for managing models and data. It includes secure login/logout for site admins.
+  </dd>
+
+  <dt>2. Enable Admin in <code>settings.py</code></dt>
+  <dd>
+    Ensure the following apps are listed in <code>INSTALLED_APPS</code>:
+    <pre><code>
+'django.contrib.admin',
+'django.contrib.auth',
+'django.contrib.contenttypes',
+'django.contrib.sessions',
+'django.contrib.messages',
+'django.contrib.staticfiles',
+    </code></pre>
+  </dd>
+
+  <dt>3. Create Superuser</dt>
+  <dd>
+    Run the following command:
+    <pre><code>python manage.py createsuperuser</code></pre>
+    It will prompt for:
+    <ul>
+      <li>Username</li>
+      <li>Email</li>
+      <li>Password</li>
+    </ul>
+  </dd>
+
+  <dt>4. Add Admin URL</dt>
+  <dd>
+    In <code>urls.py</code>:
+    <pre><code>
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+    </code></pre>
+  </dd>
+
+  <dt>5. Run the Server</dt>
+  <dd>
+    <pre><code>python manage.py runserver</code></pre>
+    Visit <a href="http://127.0.0.1:8000/admin" target="_blank">http://127.0.0.1:8000/admin</a> in your browser and log in using the superuser credentials.
+  </dd>
+
+  <dt>6. Register Models in Admin</dt>
+  <dd>
+    In <code>admin.py</code> of your app:
+    <pre><code>
+from django.contrib import admin
+from .models import Product
+
+admin.site.register(Product)
+    </code></pre>
+    Now you can manage <code>Product</code> entries from the admin interface.
+  </dd>
+
+  <dt>7. Customize Admin Panel</dt>
+  <dd>
+    You can customize the admin with <code>ModelAdmin</code> classes:
+    <pre><code>
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'stock')
+
+admin.site.register(Product, ProductAdmin)
+    </code></pre>
+  </dd>
+</dl>

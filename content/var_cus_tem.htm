@@ -1,0 +1,94 @@
+<dl>
+  <dt>1. Simple Tag</dt>
+  <dd>
+    Returns a value for direct display or use in a template.<br>
+    <strong>Code:</strong>
+    <pre><code>
+# myapp/templatetags/custom_tags.py
+from django import template
+register = template.Library()
+
+@register.simple_tag
+def site_title():
+    return "My Awesome Site"
+    </code></pre>
+    <strong>Use in Template:</strong><br>
+    <code>{% load custom_tags %}<br>{% site_title %}</code>
+  </dd>
+
+  <dt>2. Tag with Parameters</dt>
+  <dd>
+    Accepts arguments to make dynamic output.
+    <pre><code>
+@register.simple_tag
+def multiply(a, b):
+    return a * b
+    </code></pre>
+    <code>{% multiply 4 5 %} → 20</code>
+  </dd>
+
+  <dt>3. Inclusion Tag</dt>
+  <dd>
+    Renders a custom HTML template with context.
+    <pre><code>
+@register.inclusion_tag('product_card.html')
+def show_product(product):
+    return {'product': product}
+    </code></pre>
+    Template:
+    <pre>
+&lt;!-- product_card.html --&gt;
+&lt;div class="card"&gt;
+  &lt;h3&gt;{{ product.name }}&lt;/h3&gt;
+  &lt;p&gt;₹{{ product.price }}&lt;/p&gt;
+&lt;/div&gt;
+    </pre>
+    Use:
+    <code>{% show_product my_product %}</code>
+  </dd>
+
+  <dt>4. Custom Filter</dt>
+  <dd>
+    Transforms a value in a pipeline-style format.
+    <pre><code>
+@register.filter
+def currency(value):
+    return f"₹{value}"
+    </code></pre>
+    Use:
+    <code>{{ product.price|currency }}</code>
+  </dd>
+
+  <dt>5. Filter with Argument</dt>
+  <dd>
+    <pre><code>
+@register.filter
+def multiply(value, arg):
+    return value * arg
+    </code></pre>
+    <code>{{ 3|multiply:4 }} → 12</code>
+  </dd>
+
+  <dt>6. Filter with String Operation</dt>
+  <dd>
+    <pre><code>
+@register.filter
+def to_upper(value):
+    return value.upper()
+    </code></pre>
+    <code>{{ "hello"|to_upper }} → HELLO</code>
+  </dd>
+
+  <dt>7. Date Formatting Filter</dt>
+  <dd>
+    Django has built-in filters like:
+    <code>{{ post.created_at|date:"d M Y" }}</code>
+    <br>
+    You can also define your own custom formatter:
+    <pre><code>
+@register.filter
+def format_date(value):
+    return value.strftime("%b %d, %Y")
+    </code></pre>
+  </dd>
+</dl>
