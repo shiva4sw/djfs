@@ -1,0 +1,59 @@
+<dl>
+  <dt>1. Create a GitHub Repository</dt>
+  <dd>
+    Push your project code to a GitHub repository. Render connects directly to GitHub.
+  </dd>
+
+  <dt>2. Sign Up / Log In to Render</dt>
+  <dd>
+    Go to <a href="https://render.com/" target="_blank">render.com</a> and sign in with GitHub or email.
+  </dd>
+
+  <dt>3. Create a New Web Service</dt>
+  <dd>
+    Click “New” → “Web Service” → Choose your GitHub repo.
+  </dd>
+
+  <dt>4. Fill Service Details</dt>
+  <dd>
+    <ul>
+      <li><strong>Name:</strong> Name of your app</li>
+      <li><strong>Build Command:</strong> Depends on project type (<code>pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate</code>)</li>
+      <li><strong>Start Command:</strong> (<code>gunicorn myproject.wsgi:application</code>)</li>
+      <li><strong>Environment:</strong> Choose your runtime (Python)</li>
+    </ul>
+  </dd>
+
+  <dt>5. Environment Variables (Optional)</dt>
+  <dd>
+    Add secrets like:
+    <ul>
+      <li><code>SECRET_KEY</code> for Django</li>
+      <li><code>DATABASE_URL</code> for PostgreSQL</li>
+    </ul>
+  </dd>
+
+  <dt>6. Deploy</dt>
+  <dd>
+    Click “Create Web Service”. Render will:
+    <ul>
+      <li>Clone the GitHub repo</li>
+      <li>Run your build and start commands</li>
+      <li>Host the app at a public URL</li>
+    </ul>
+  </dd>
+
+  <dt>7. Add PostgreSQL (Optional)</dt>
+  <dd>
+    Go to “New” → “PostgreSQL”, then connect it to your web service using the `DATABASE_URL` it provides.
+  </dd>
+
+  <dt>8. For Django: Static Files</dt>
+  <dd>
+    Set in settings.py:
+    <ul>
+      <li><code>DEBUG=False</code></li>
+      <li><code>ALLOWED_HOSTS = ['your-service-name.onrender.com']</code></li>
+    </ul>
+  </dd>
+</dl>

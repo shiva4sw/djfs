@@ -34,6 +34,10 @@
     {
         "topic":"Push Code to Github Repository",
         "path":"pus_cod_git"
+    },
+    {
+        "topic":"Deploy Code to Render",
+        "path":"dep_cod_ren"
     },    
     {
         "topic":"Types of Views",
