@@ -1,0 +1,202 @@
+<dl>
+  <dt>1. Create Django Project</dt>
+  <dd>
+    <pre><code>Start Virtual Environment(venv\Scripts\activate)</code></pre>
+    <pre><code>django-admin startproject blog_project</code></pre>
+    Navigate into it:
+    <pre><code>cd blog_project</code></pre>
+  </dd>
+
+  <dt>2. Create Blog App</dt>
+  <dd>
+    <pre><code>python manage.py startapp blog</code></pre>
+    Add `'blog'` to <code>INSTALLED_APPS</code> in <code>settings.py</code>.
+  </dd>
+
+  <dt>3. Create Post Model</dt>
+  <dd>
+    In <code>blog/models.py</code>:
+    <pre><code>
+from django.db import models
+from django.contrib.auth.models import User
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    </code></pre>
+  </dd>
+
+  <dt>4. Create ModelForm</dt>
+  <dd>
+    In <code>blog/forms.py</code>:
+    <pre><code>
+from django import forms
+from .models import Post
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+    </code></pre>
+  </dd>
+
+  <dt>5. Create Views</dt>
+  <dd>
+    In <code>blog/views.py</code>:
+    <pre><code>
+from django.shortcuts import render, redirect
+from .models import Post
+from .forms import PostForm
+from django.contrib.auth.decorators import login_required
+
+def post_list(request):
+    posts = Post.objects.all().order_by('-created')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+
+@login_required
+def post_create(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post_list')
+    else:
+        form = PostForm()
+    return render(request, 'blog/post_form.html', {'form': form})
+    </code></pre>
+  </dd>
+
+  <dt>6. Create URLs</dt>
+  <dd>
+    In <code>blog/urls.py</code>:
+    <pre><code>
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.post_list, name='post_list'),
+    path('new/', views.post_create, name='post_create'),
+]
+    </code></pre>
+    In <code>blog_project/urls.py</code>:
+    <pre><code>
+from django.contrib import admin
+from django.urls import path, include
+from django.contrib.auth import views as auth_views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('blog.urls')),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+]
+    </code></pre>
+  </dd>
+
+  <dt>7. Create Templates</dt>
+  <dd>
+    <ul>
+      <li><code>base.html</code>: common layout with login/logout links</li>
+      <li><code>post_list.html</code>: list of blog posts</li>
+      <li><code>post_form.html</code>: form for creating a post</li>
+    </ul>
+  </dd>
+
+  <dt>8. Configure Login Redirects</dt>
+  <dd>
+    In <code>settings.py</code>:
+    <pre><code>
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+    </code></pre>
+  </dd>
+
+  <dt>9. Migrate & Run</dt>
+  <dd>
+    <pre><code>
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+    </code></pre>
+  </dd>
+</dl>
+
+<dl>
+  <dt>1. base.html</dt>
+  <dd>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;My Blog&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  {% if user.is_authenticated %}
+    Welcome, {{ user.username }} |
+    &lt;a href="{% url 'logout' %}"&gt;Logout&lt;/a&gt; |
+    &lt;a href="{% url 'post_create' %}"&gt;New Post&lt;/a&gt;
+  {% else %}
+    &lt;a href="{% url 'login' %}"&gt;Login&lt;/a&gt;
+  {% endif %}
+  &lt;hr&gt;
+
+  {% block content %}{% endblock %}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+  </dd>
+
+  <dt>2. post_list.html</dt>
+  <dd>
+    <pre><code>{% extends 'blog/base.html' %}
+
+{% block content %}
+  &lt;h2&gt;All Posts&lt;/h2&gt;
+  {% for post in posts %}
+    &lt;div&gt;
+      &lt;h3&gt;{{ post.title }}&lt;/h3&gt;
+      &lt;small&gt;By {{ post.author.username }} on {{ post.created|date:"Y-m-d H:i" }}&lt;/small&gt;
+      &lt;p&gt;{{ post.content }}&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;hr&gt;
+  {% empty %}
+    &lt;p&gt;No posts yet.&lt;/p&gt;
+  {% endfor %}
+{% endblock %}
+</code></pre>
+  </dd>
+
+  <dt>3. post_form.html</dt>
+  <dd>
+    <pre><code>{% extends 'blog/base.html' %}
+
+{% block content %}
+  &lt;h2&gt;New Post&lt;/h2&gt;
+  &lt;form method="post"&gt;
+    {% csrf_token %}
+    {{ form.as_p }}
+    &lt;button type="submit"&gt;Publish&lt;/button&gt;
+  &lt;/form&gt;
+{% endblock %}
+</code></pre>
+  </dd>
+
+  <dt>4. registration/login.html</dt>
+  <dd>
+    <pre><code>{% extends 'blog/base.html' %}
+
+{% block content %}
+  &lt;h2&gt;Login&lt;/h2&gt;
+  &lt;form method="post"&gt;
+    {% csrf_token %}
+    {{ form.as_p }}
+    &lt;button type="submit"&gt;Login&lt;/button&gt;
+  &lt;/form&gt;
+{% endblock %}
+</code></pre>
+  </dd>
+</dl>

@@ -126,6 +126,10 @@
     {
         "topic":"Javascript DOM",
         "path":"_jav_dom"
+    },        
+    {
+        "topic":"Django Blog Application",
+        "path":"dja_blo_app"
     },
     {
 
