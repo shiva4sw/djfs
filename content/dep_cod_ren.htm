@@ -1,6 +1,15 @@
 <dl>
   <dt>1. Create a GitHub Repository</dt>
   <dd>
+    <pre><b>1.a. Install gunicorn</b>
+      <code>pip install gunicorn</code></pre>
+
+    <pre><b>1.b. Create requirements.txt</b>
+      <code>pip freeze > requirements.txt</code></pre>
+
+    <pre><b>1.c. Create .Procfile</b>
+      <code>web: gunicorn myproject.wsgi:application</code></pre>
+
     Push your project code to a GitHub repository. Render connects directly to GitHub.
   </dd>
 

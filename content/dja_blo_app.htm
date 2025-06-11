@@ -199,4 +199,14 @@ python manage.py runserver
 {% endblock %}
 </code></pre>
   </dd>
+
+  <div class="info">
+    <pre>
+Template files should be saved in <code>blog/templates/blog/</code>, 
+except <code>registration/login.html which should be in blog/templates/registration/.</code>
+
+<code>Make sure 'DIRS': [BASE_DIR / 'templates'] is set in TEMPLATES inside settings.py
+if you move them out of the app folder.</code>
+</pre>
+  </div>
 </dl>
