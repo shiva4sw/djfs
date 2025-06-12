@@ -1,0 +1,93 @@
+<dl>
+  <dt>1. What is Django REST Framework?</dt>
+  <dd>
+    Django REST Framework (DRF) is a powerful and flexible toolkit for building Web APIs in Django. It provides features for serializing data, handling requests/responses, authentication, and more.
+  </dd>
+
+  <dt>2. Key Components</dt>
+  <dd>
+    <ul>
+      <li><strong>Serializers:</strong> Convert complex data such as querysets and model instances into native Python data types that can easily be rendered into JSON, XML, etc. They also handle deserialization.</li>
+      <li><strong>Views/ViewSets:</strong> API views are used to handle HTTP requests (GET, POST, etc.). ViewSets allow you to define common logic in a single class that handles multiple actions (list, retrieve, create, update, delete).</li>
+      <li><strong>Routers:</strong> Automatically determine URL conf for ViewSets, saving you from writing a lot of URL configuration.</li>
+      <li><strong>Authentication & Permissions:</strong> Integrated support for various authentication methods (Token, Session, OAuth) and permissions to control access.</li>
+    </ul>
+  </dd>
+
+  <dt>3. Installing DRF and Create postapp</dt>
+  <dd>
+    Install using pip:
+    <pre><code>pip install djangorestframework</code></pre>
+    Then add <code>'rest_framework'</code> to <code>INSTALLED_APPS</code> in your project's <code>settings.py</code>.
+    <br/><br/>
+    Create postapp:
+    <pre><code>python manage.py startapp postapp</code></pre>
+    Then add <code>'postapp'</code> to <code>INSTALLED_APPS</code> in your project's <code>settings.py</code>.
+  </dd>
+
+  <dt>4. Example: Creating a Simple API</dt>
+  <dd>
+    <strong>a. Define a Model (e.g., <code>Post in models.py</code>):</strong>
+    <pre><code>
+from django.db import models
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    </code></pre>
+
+    <strong>b. Create a Serializer in serializerrs.py:</strong>
+     <pre><code>
+from rest_framework import serializers
+from .models import Post
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = '__all__'
+    </code></pre>
+
+    <strong>c. Write a ViewSet in views.py:</strong>
+    <pre><code>
+from rest_framework import viewsets
+from .models import Post
+from .serializers import PostSerializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().order_by('-created')
+    serializer_class = PostSerializer
+    </code></pre>
+
+    <strong>d. Configure URLs with a Router in urls.py:</strong>
+    <pre><code>
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PostViewSet
+
+router = DefaultRouter()
+router.register(r'posts', PostViewSet)
+
+urlpatterns = [
+    path('api/', include(router.urls)),
+]
+    </code></pre>
+
+    <pre>
+<h5>Enable CORS request (Client/Javascript)</h5>
+<code>pip install django-cors-headers</code>
+<code>Add 'corsheaders' in INSTALLED_APPS in settings.py</code>
+<code>Add CORS_ALLOW_ALL_ORIGINS = True in setting.py</code>
+<code>Add 'corsheaders.middleware.CorsMiddleware' in MIDDLEWARE in settings.py</code>
+    </pre>
+  </dd>
+
+
+  <dt>5. Testing the API</dt>
+  <dd>
+    Run your Django server and visit <code>http://127.0.0.1:8000/api/posts/</code> to interact with the API. You’ll get an interactive browsable API interface where you can view, create, update, and delete posts.
+  </dd> 
+</dl>

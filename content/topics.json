@@ -80,6 +80,10 @@
         "path":"mys_dat_con"
     },        
     {
+        "topic":"PostgreSQL Database Configuration",
+        "path":"pos_dat_con"
+    },        
+    {
         "topic":"Normal HTML Forms",
         "path":"nor_htm_for"
     },        
@@ -130,6 +134,10 @@
     {
         "topic":"Django Blog Application",
         "path":"dja_blo_app"
+    },        
+    {
+        "topic":"Django REST Application",
+        "path":"dja_res_app"
     },
     {
 
